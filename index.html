@@ -26,7 +26,7 @@ header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
 #marca{width:min(40vw,170px,17vh);height:auto;overflow:visible;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
 #chapeu{transform-box:fill-box;transform-origin:15% 90%}
 
-.placas{position:absolute;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:560px;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;justify-content:center;gap:clamp(6px,2.6vw,14px)}
+.placas{position:absolute;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:560px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;justify-content:center;gap:clamp(6px,2.6vw,14px)}
 .tag{position:relative;flex:1 1 0;min-width:0;max-width:170px;text-align:center;padding:9px 6px 8px;border-radius:999px;border:2px solid var(--mint-deep);background:rgba(29,29,27,.88);color:var(--ink);font-weight:900;font-size:clamp(13px,3.8vw,16px);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;text-decoration:none;box-shadow:0 8px 18px rgba(0,0,0,.55);transition:background .35s,color .35s,border-color .35s;opacity:0}
 .tag b{color:var(--mint);transition:color .35s}
 .tag.vez{background:var(--mint);border-color:var(--mint);color:var(--bg)}
@@ -38,6 +38,12 @@ header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
 .fallback{position:absolute;left:16px;right:16px;bottom:22%;z-index:4;display:none;flex-direction:column;gap:12px}
 .nogl .fallback{display:flex}
 .nogl .placas,.nogl .hit{display:none}
+.jogo{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5;width:calc(100% - 24px);max-width:560px;display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 16px 9px;border-radius:999px;background:var(--amber);color:var(--bg);text-decoration:none;font-weight:900;font-size:clamp(14px,4vw,17px);letter-spacing:.1em;text-transform:uppercase;box-shadow:0 0 0 5px rgba(242,182,64,.18),0 10px 22px rgba(0,0,0,.5);animation:chama 2.4s ease-in-out infinite}
+.jogo svg{width:18px;height:18px;flex:none}
+.jogo span{white-space:nowrap}
+.jogo:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@keyframes chama{0%,100%{box-shadow:0 0 0 5px rgba(242,182,64,.18),0 10px 22px rgba(0,0,0,.5)}50%{box-shadow:0 0 0 10px rgba(242,182,64,.08),0 10px 22px rgba(0,0,0,.5)}}
+@media (prefers-reduced-motion:reduce){.jogo{animation:none}}
 .fallback a{padding:14px;border-radius:999px;border:2px solid var(--mint);text-align:center;color:var(--ink);text-decoration:none;font-weight:900;font-size:18px;letter-spacing:.1em;text-transform:uppercase}
 </style>
 
@@ -68,7 +74,7 @@ header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
     <a class="tag" id="tInstagram" href="#" target="_blank" rel="noopener"><b>@</b> Insta</a>
   </div>
   <div class="fallback"><a id="fAvaliar" href="#" target="_blank" rel="noopener">★ Avaliar no Google</a><a id="fCardapio" href="#" target="_blank" rel="noopener">Cardápio</a><a id="fInstagram" href="#" target="_blank" rel="noopener">@ Instagram</a></div>
-  <div class="hint">Toque num <b>sambista</b></div>
+  <a class="jogo" id="btnJogo" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" fill="currentColor"/></svg><span>Jogue e ganhe um chopp</span></a>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -77,6 +83,8 @@ header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
 const LINK_AVALIACAO = "https://www.google.com/maps/search/?api=1&query=Boteco+de+Sampa+Boqueir%C3%A3o+Curitiba";
 const LINK_CARDAPIO  = "https://botecodesampa.com/";
 const LINK_INSTAGRAM = "https://www.instagram.com/botecodesampaboqueirao/";
+const LINK_JOGO = /github\.io$/.test(location.hostname) ? "jogo/" : "https://claude.ai/artifact/QxBxaN2bfc1zjUrSDDEp1b";
+document.getElementById("btnJogo").href = LINK_JOGO;
 [["Avaliar",LINK_AVALIACAO],["Cardapio",LINK_CARDAPIO],["Instagram",LINK_INSTAGRAM]].forEach(([k,u])=>["h","t","f"].forEach(p=>document.getElementById(p+k).href=u));
 
 const scene=document.getElementById("scene"), cv=document.getElementById("gl");
