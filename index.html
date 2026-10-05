@@ -17,30 +17,27 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--bg);color:var(--ink)}
 body{font-family:var(--display);overflow:hidden;-webkit-tap-highlight-color:transparent}
-.scene{position:relative;width:100%;max-width:640px;height:100%;min-height:560px;margin:0 auto;overflow:hidden;background:var(--bg)}
+.scene{position:relative;width:100%;height:100%;min-height:560px;margin:0 auto;overflow:hidden;background:var(--bg)}
 #gl,#fx{position:absolute;inset:0;width:100%;height:100%;display:block}
 #fx{pointer-events:none;z-index:2}
-header{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;justify-content:center;padding-top:calc(5% + env(safe-area-inset-top,0px));padding-bottom:38px;pointer-events:none;
-  background:linear-gradient(rgba(29,29,27,.92) 0,rgba(29,29,27,.75) 55%,rgba(29,29,27,0) 100%)}
+header{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;justify-content:center;padding-top:calc(clamp(14px,3.5vh,40px) + env(safe-area-inset-top,0px));pointer-events:none}
+@media (min-aspect-ratio:6/5){header{justify-content:flex-start;padding-left:clamp(20px,4vw,64px)} #marca{width:min(17vh,170px)}}
 header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-#marca{width:min(40vw,172px,21vh);height:auto;overflow:visible;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+#marca{width:min(40vw,170px,17vh);height:auto;overflow:visible;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
 #chapeu{transform-box:fill-box;transform-origin:15% 90%}
 
-.placas{position:absolute;left:12px;right:12px;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;justify-content:center;gap:clamp(6px,2.6vw,14px)}
+.placas{position:absolute;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:560px;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;justify-content:center;gap:clamp(6px,2.6vw,14px)}
 .tag{position:relative;flex:1 1 0;min-width:0;max-width:170px;text-align:center;padding:9px 6px 8px;border-radius:999px;border:2px solid var(--mint-deep);background:rgba(29,29,27,.88);color:var(--ink);font-weight:900;font-size:clamp(13px,3.8vw,16px);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;text-decoration:none;box-shadow:0 8px 18px rgba(0,0,0,.55);transition:background .35s,color .35s,border-color .35s;opacity:0}
 .tag b{color:var(--mint);transition:color .35s}
 .tag.vez{background:var(--mint);border-color:var(--mint);color:var(--bg)}
 .tag.vez b{color:var(--bg)}
-.selo{position:absolute;left:0;top:0;z-index:3;width:34px;height:34px;margin:-34px 0 0 -17px;border-radius:50%;display:grid;place-items:center;background:rgba(29,29,27,.9);border:2px solid var(--mint-deep);color:var(--mint);font-weight:900;font-size:17px;line-height:1;pointer-events:none;opacity:0;box-shadow:0 6px 14px rgba(0,0,0,.5);transition:background .35s,color .35s,border-color .35s}
-.selo.vez{background:var(--mint);border-color:var(--mint);color:var(--bg)}
-.selo svg{width:16px;height:16px}
 .tag:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 .hit{position:absolute;left:0;top:0;z-index:3;border-radius:40%;-webkit-tap-highlight-color:transparent}
 .hint{position:absolute;left:0;right:0;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:4;text-align:center;font-weight:700;font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:rgba(244,241,232,.6);pointer-events:none;text-shadow:0 2px 8px #000}
 .hint b{color:var(--mint);font-weight:800}
 .fallback{position:absolute;left:16px;right:16px;bottom:22%;z-index:4;display:none;flex-direction:column;gap:12px}
 .nogl .fallback{display:flex}
-.nogl .placas,.nogl .hit,.nogl .selo{display:none}
+.nogl .placas,.nogl .hit{display:none}
 .fallback a{padding:14px;border-radius:999px;border:2px solid var(--mint);text-align:center;color:var(--ink);text-decoration:none;font-weight:900;font-size:18px;letter-spacing:.1em;text-transform:uppercase}
 </style>
 
@@ -65,9 +62,6 @@ header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
   <a class="hit" id="hAvaliar" href="#" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"></a>
   <a class="hit" id="hCardapio" href="#" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"></a>
   <a class="hit" id="hInstagram" href="#" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"></a>
-  <span class="selo" id="sAvaliar" aria-hidden="true">★</span>
-  <span class="selo" id="sCardapio" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 2h10v12H3z M5.5 5h5 M5.5 8h5 M5.5 11h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-  <span class="selo" id="sInstagram" aria-hidden="true">@</span>
   <div class="placas">
     <a class="tag" id="tAvaliar" href="#" target="_blank" rel="noopener"><b>★</b> Avaliar</a>
     <a class="tag" id="tCardapio" href="#" target="_blank" rel="noopener">Cardápio</a>
@@ -100,7 +94,7 @@ else start();
 function start(){
 const T3=THREE, V=(x,y,z)=>new T3.Vector3(x,y,z);
 const R=new T3.WebGLRenderer({canvas:cv,antialias:true,powerPreference:"high-performance"});
-R.setPixelRatio(Math.min(2,devicePixelRatio||1));
+R.setPixelRatio(Math.min(1.75,devicePixelRatio||1));
 R.shadowMap.enabled=true; R.shadowMap.type=T3.PCFSoftShadowMap;
 R.outputEncoding=T3.sRGBEncoding; R.toneMapping=T3.ACESFilmicToneMapping; R.toneMappingExposure=1.15;
 const S3=new T3.Scene();
@@ -130,6 +124,14 @@ for(let i=0;i<14;i++){const x=-8+i*1.25+(i%3)*.2, y=2.6+(i%2)*1.25, w=.7+(i%3)*.
 S3.add(mesh(GEO.box,M(0x3B2717,.6),[-4.2,.55,-6.2],[5,1.1,.9],null,false));
 for(let i=0;i<10;i++) S3.add(mesh(GEO.cylLo,M([0x3D6B45,0x6B2E1E,0xC98A2B,0x2F4D6B][i%4],.25,{transparent:true,opacity:.85}),[-6.2+i*.45,1.32,-6.4],[.07,.42,.07],null,false));
 
+// letreiro neon "Chopp" na parede, como o do salão
+const neonC=document.createElement("canvas"); neonC.width=512; neonC.height=200; const neonT=new T3.CanvasTexture(neonC); neonT.encoding=T3.sRGBEncoding;
+function drawNeon(){const x=neonC.getContext("2d"); x.clearRect(0,0,512,200); x.font="italic 900 150px 'Big Shoulders Display',Impact,sans-serif"; x.textAlign="center"; x.textBaseline="middle";
+  x.shadowColor="#FF7A3D"; x.shadowBlur=26; x.fillStyle="#FFD2A0"; x.fillText("Chopp",256,104); x.shadowBlur=10; x.fillText("Chopp",256,104); neonT.needsUpdate=true;}
+drawNeon(); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(drawNeon);
+const neon=new T3.Mesh(new T3.PlaneGeometry(2.0,.78),new T3.MeshBasicMaterial({map:neonT,transparent:true,toneMapped:false,fog:false,depthWrite:false})); neon.position.set(3.1,3.05,-7.85); S3.add(neon);
+S3.add(mesh(GEO.box,M(0x101010,.5),[3.1,3.05,-7.93],[2.2,.92,.04],null,false));
+const neonL=new T3.PointLight(C(0xFF8A4A),1.2,6,1.8); neonL.position.set(3.1,3.4,-7.2); S3.add(neonL);
 // ---------- luzes ----------
 S3.add(new T3.HemisphereLight(C(0xFFD9A8),C(0x2A1D14),.42));
 const key=new T3.SpotLight(C(0xFFCB8A),3.2,22,.62,.55,1.2); key.position.set(.4,6.2,2.2); key.target.position.set(0,.7,-.5);
@@ -137,12 +139,15 @@ key.castShadow=true; key.shadow.mapSize.set(1024,1024); key.shadow.bias=-.0004; 
 const rim=new T3.DirectionalLight(C(0xA3D4B7),.55); rim.position.set(-2,3.5,-6); S3.add(rim);
 const vezL=new T3.SpotLight(C(0xFFF1D6),0,14,.22,.65,1); vezL.position.set(0,6,1); S3.add(vezL,vezL.target);
 const fill=new T3.PointLight(C(0xFFB870),.8,9,1.6); fill.position.set(0,2.8,-2.6); S3.add(fill);
+const mintL=new T3.PointLight(C(0x9FE0BC),0,2.6,1.6); S3.add(mintL);
 // gambiarra: dois fios cruzando o salão
+const HALO=(()=>{const c=document.createElement("canvas"); c.width=c.height=128; const x=c.getContext("2d"), gr=x.createRadialGradient(64,64,0,64,64,64); gr.addColorStop(0,"rgba(255,255,255,1)"); gr.addColorStop(.25,"rgba(255,255,255,.45)"); gr.addColorStop(1,"rgba(255,255,255,0)"); x.fillStyle=gr; x.fillRect(0,0,128,128); return new T3.CanvasTexture(c);})();
 const BOFF=C(0x3A352E), BON=new T3.Color(2.2,1.6,.8); const bulbMat=new T3.MeshBasicMaterial({color:C(0xFFE2A8),toneMapped:false,fog:false}), bulbs=[];
 [[-5,3.6,-4.2,5,3.6,-.3],[-4.6,3.9,-1.2,4.8,3.9,-5.6]].forEach(([x0,y0,z0,x1,y1,z1])=>{
   const pts=[]; for(let i=0;i<=30;i++){const u=i/30; pts.push(V(x0+(x1-x0)*u,y0-Math.sin(u*Math.PI)*.55,z0+(z1-z0)*u));}
   S3.add(new T3.Line(new T3.BufferGeometry().setFromPoints(pts),new T3.LineBasicMaterial({color:C(0x8A8070)})));
-  for(let i=1;i<14;i++){const p=pts[Math.round(i/14*30)]; const b=new T3.Mesh(new T3.SphereGeometry(.055,10,8),bulbMat.clone()); b.position.copy(p).add(V(0,-.08,0)); S3.add(b); bulbs.push(b);}
+  for(let i=1;i<14;i++){const p=pts[Math.round(i/14*30)]; const b=new T3.Mesh(new T3.SphereGeometry(.05,10,8),bulbMat.clone()); b.position.copy(p).add(V(0,-.08,0)); S3.add(b);
+    const h=new T3.Sprite(new T3.SpriteMaterial({map:HALO,color:C(0xFFC27A),transparent:true,opacity:0,depthWrite:false,blending:T3.AdditiveBlending,toneMapped:false,fog:false})); h.scale.setScalar(.55); h.position.copy(b.position); S3.add(h); b.userData.halo=h; bulbs.push(b);}
 });
 
 // ---------- mesa da roda ----------
@@ -279,11 +284,15 @@ for(let i=0;i<15;i++){
 
 // ---------- câmera que enquadra a roda em qualquer tela ----------
 let W=0,H=0;
-const CAM_T=V(0,1.0,-.55);
-function layout(){W=scene.clientWidth;H=scene.clientHeight; R.setSize(W,H,false); cam.aspect=W/H; cam.setViewOffset(W,H,0,-H*.11,W,H); cam.updateProjectionMatrix(); fx.width=W*Math.min(2,devicePixelRatio||1); fx.height=H*Math.min(2,devicePixelRatio||1); fxg.setTransform(fx.width/W,0,0,fx.height/H,0,0);}
+const CAM_T=V(0,1.15,-.75);
+let bandTop=0, bandBot=1;
+function layout(){W=scene.clientWidth;H=scene.clientHeight; R.setSize(W,H,false); cam.aspect=W/H;
+  const sb=scene.getBoundingClientRect(), hb=document.getElementById("marca").getBoundingClientRect(), pb=document.querySelector(".placas").getBoundingClientRect();
+  const wide=W/H>1.2; bandTop=wide?H*.04:hb.bottom-sb.top+6; bandBot=pb.top-sb.top-10; if(bandBot-bandTop<H*.35){bandTop=H*.3;bandBot=H*.85;}
+  cam.setViewOffset(W,H,0,Math.round(H/2-(bandTop+bandBot)/2),W,H); cam.updateProjectionMatrix(); fx.width=W*Math.min(2,devicePixelRatio||1); fx.height=H*Math.min(2,devicePixelRatio||1); fxg.setTransform(fx.width/W,0,0,fx.height/H,0,0);}
 const fx=document.getElementById("fx"), fxg=fx.getContext("2d");
 addEventListener("resize",layout); layout();
-function camDist(){const half=1.5, hf=2*Math.atan(Math.tan(cam.fov/2*DEG)*cam.aspect); return clamp(half/Math.tan(hf/2),4.6,11);}
+function camDist(){const t=Math.tan(cam.fov/2*DEG), rh=(bandBot-bandTop)/H, wide=cam.aspect>1.2; return clamp(Math.max((wide?1.7:1.0)/(t*rh), 1.5/(t*cam.aspect)),3.8,14);}
 
 // ---------- som ----------
 let AC=null; function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}return AC;}
@@ -297,7 +306,8 @@ function play(kind){const a=ac(); if(!a) return; if(a.state==="suspended") a.res
   else {[587,740,880,1175].forEach((f,i)=>tone(a,f,.55,.12,t+i*.022,"triangle"));[587,740,880,1175].forEach((f,i)=>tone(a,f,.4,.07,t+.2+i*.018,"triangle"));}}
 
 // ---------- plaquinhas e áreas de toque ----------
-const tags=sambistas.map(s=>({s,tag:document.getElementById("t"+s.k),hit:document.getElementById("h"+s.k),selo:document.getElementById("s"+s.k)}));
+const tags=sambistas.map(s=>({s,tag:document.getElementById("t"+s.k),hit:document.getElementById("h"+s.k)}));
+let hoverK=-1; tags.forEach((t,k)=>[t.tag,t.hit].forEach(el=>{el.addEventListener("pointerenter",()=>hoverK=k); el.addEventListener("pointerleave",()=>{if(hoverK===k)hoverK=-1;}); el.addEventListener("focus",()=>hoverK=k); el.addEventListener("blur",()=>{if(hoverK===k)hoverK=-1;});}));
 const notes=[];
 function proj(v){const p=v.clone().project(cam); return {x:(p.x*.5+.5)*W,y:(-p.y*.5+.5)*H};}
 function headPos(s,dy=0){const v=new T3.Vector3(0,dy,0); s.u.head.localToWorld(v); return v;}
@@ -306,7 +316,9 @@ tags.forEach(({s,tag,hit})=>[tag,hit].forEach(el=>el.addEventListener("pointerdo
 
 // ---------- animação ----------
 const t0=performance.now(); let last=t0, lastStep=-1, vez=-1;
-const tmp=V(0,0,0);
+const tmp=V(0,0,0), par={x:0,y:0,tx:0,ty:0};
+scene.addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return; const b=scene.getBoundingClientRect(); par.tx=((e.clientX-b.left)/b.width-.5)*2; par.ty=((e.clientY-b.top)/b.height-.5)*2;});
+scene.addEventListener("pointerleave",()=>{par.tx=0;par.ty=0;});
 function frame(now){
   const dt=Math.min(.05,(now-last)/1000); last=now; const T=(now-t0)/1000, Rr=T-2.4;
   // letreiro + chapéu
@@ -315,24 +327,28 @@ function frame(now){
   if(Rr>0){const c=Rr%(BEAT*8); if(c<BEAT*1.2){const q=Math.sin(c/(BEAT*1.2)*Math.PI); hy=-16*q; hr=-18*q;}}
   chapeuLogo.style.transform=`translate(0px,${hy.toFixed(1)}px) rotate(${hr.toFixed(1)}deg)`;
   // câmera: entra do alto e depois passeia devagar em volta da roda
-  const ci=easeIO(clamp(T/2.6,0,1)), d=camDist()*(1+(1-ci)*.55), orb=(1-ci)*.5+Math.sin(T*.13)*.09*AMP, alt=1.55+(1-ci)*2.2+Math.sin(T*.21)*.08*AMP;
-  cam.position.set(CAM_T.x+Math.sin(orb)*d, CAM_T.y+alt, CAM_T.z+Math.cos(orb)*d); cam.lookAt(CAM_T.x,CAM_T.y-.35+(1-ci)*.3,CAM_T.z);
+  par.x+=(par.tx-par.x)*dt*2.5; par.y+=(par.ty-par.y)*dt*2.5;
+  const ci=easeIO(clamp(T/2.6,0,1)), d=camDist()*(1+(1-ci)*.55), orb=(1-ci)*.5+Math.sin(T*.13)*.07*AMP+par.x*.12, alt=1.35+(1-ci)*2.2+Math.sin(T*.21)*.06*AMP-par.y*.25;
+  cam.position.set(CAM_T.x+Math.sin(orb)*d, CAM_T.y+alt, CAM_T.z+Math.cos(orb)*d); cam.lookAt(CAM_T.x,CAM_T.y+(1-ci)*.3,CAM_T.z);
   // lâmpadas acendem
-  bulbs.forEach((b,i)=>{const lit=clamp((T-.15-i*.05)/.2,0,1), pul=.75+.25*Math.sin(T/BEAT*Math.PI*2+i); b.material.color.copy(BOFF).lerp(BON,lit*pul);});
+  bulbs.forEach((b,i)=>{const lit=clamp((T-.15-i*.05)/.2,0,1), pul=.8+.2*Math.sin(T/BEAT*Math.PI*2+i); b.material.color.copy(BOFF).lerp(BON,lit*pul); b.userData.halo.material.opacity=lit*pul*.55;});
+  const nf=(Math.sin(T*23)>.97||Math.sin(T*7.3)>.995)?.35:1; neon.material.opacity=clamp((T-1)/.4,0,1)*nf; neonL.intensity=1.2*neon.material.opacity;
   key.intensity=3.2*clamp((T-.3)/1.2,0,1); fill.intensity=.8*clamp((T-.8)/1,0,1);
   // vez de quem puxa
   const step=Rr>0?Math.floor((Rr%CYCLE)/STEP):-1, v=Rr>0?Math.floor(Rr/CYCLE)%3:-1;
-  if(v!==vez){vez=v; tags.forEach((t,k)=>{t.tag.classList.toggle("vez",k===vez); t.selo.classList.toggle("vez",k===vez);});}
+  const lead=hoverK>=0?hoverK:v; if(lead!==vez){vez=lead; tags.forEach((t,k)=>t.tag.classList.toggle("vez",k===vez));}
   const hits={pandeiro:[0,3,4,7,8,11,12,15],tanta:[0,2,4,6,8,9,12,14],cavaco:[0,2,5,7,8,10,13,15]};
   if(step>=0&&step!==lastStep){lastStep=step; sambistas.forEach((s,k)=>{if(hits[s.kind].includes(step)){s.hit=T; if(k===vez&&step%4===0) emitNote(s);}});}
-  if(vez>=0){const hpw=headPos(sambistas[vez]); vezL.target.position.copy(hpw); vezL.position.set(hpw.x*.6,6,hpw.z+2.2); vezL.intensity+=(5-vezL.intensity)*dt*3;}
+  if(vez>=0){const hpw=headPos(sambistas[vez]), k=1-Math.exp(-dt*4);
+    vezL.target.position.lerp(hpw,k); tmp.set(hpw.x*.6,6,hpw.z+2.2); vezL.position.lerp(tmp,k); vezL.intensity+=(5-vezL.intensity)*dt*3;
+    tmp.set(hpw.x,hpw.y+.35,hpw.z-.45); mintL.position.lerp(tmp,k); mintL.intensity+=((1.6+.6*Math.max(0,Math.sin(T/BEAT*Math.PI*2)))-mintL.intensity)*dt*4;}
   const beatPh=T/BEAT*Math.PI, st=T/STEP*Math.PI;
   // os três da frente
   sambistas.forEach((s,k)=>{
     s.boost=Math.max(0,s.boost-dt*1.5);
     const amp=((k===vez?1.2:.8)+s.boost)*AMP, since=T-s.hit, h=since<.2?1-easeO(since/.2):0;
     const b=s.u.body; b.position.y=.56+Math.abs(Math.sin(beatPh+k))*.025*amp; b.rotation.z=Math.sin(beatPh/2+k)*.05*amp; b.rotation.x=-.04+Math.sin(beatPh+k)*.03*amp;
-    s.u.head.rotation.x=.08+Math.sin(beatPh*2+k)*.07*amp; s.u.head.rotation.z=Math.sin(beatPh+k)*.06*amp;
+    s.u.head.rotation.x=.08+Math.sin(beatPh*2+k)*.07*amp; s.u.head.rotation.z=Math.sin(beatPh+k)*.06*amp; s.u.head.rotation.y=Math.sin(T*.35+k*2.1)*.28*Math.max(0,Math.sin(T*.17+k));
     s.u.boca.scale.y=.03*(1+Math.max(0,Math.sin(T*7+k*2))*.9);                       // cantando
     const pop=T-s.pop, hl=pop<.7?Math.sin(pop/.7*Math.PI):0;
     if(s.u.hat){s.u.hat.position.y=.19+hl*.22; s.u.hat.rotation.x=-.06-hl*.5;}
@@ -369,8 +385,8 @@ function frame(now){
   });
   R.render(S3,cam);
   // plaquinhas e áreas de toque acompanham cada sambista
-  tags.forEach(({s,tag,hit,selo})=>{const top=proj(headPos(s,.5)), foot=proj(V(s.g.position.x,.45,s.g.position.z)), hd=proj(headPos(s,0));
-    const a=clamp((T-2.2)/.5,0,1); tag.style.opacity=a; selo.style.opacity=a; selo.style.transform=`translate(${top.x.toFixed(1)}px,${(top.y+Math.sin(T*3+s.ang)*3).toFixed(1)}px)`;
+  tags.forEach(({s,tag,hit})=>{const top=proj(headPos(s,.5)), foot=proj(V(s.g.position.x,.45,s.g.position.z)), hd=proj(headPos(s,0));
+    const a=clamp((T-2.2)/.5,0,1); tag.style.opacity=a;
     const w=Math.abs(foot.y-hd.y)*1.05; hit.style.width=w+"px"; hit.style.height=(foot.y-top.y)+"px"; hit.style.transform=`translate(${(hd.x-w/2).toFixed(1)}px,${top.y.toFixed(1)}px)`;});
   // notas
   fxg.clearRect(0,0,W,H); fxg.textAlign="center"; fxg.textBaseline="middle"; fxg.font="900 24px 'Big Shoulders Display',Impact,sans-serif";
