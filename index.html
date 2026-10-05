@@ -83,7 +83,7 @@ header h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
 const LINK_AVALIACAO = "https://www.google.com/maps/search/?api=1&query=Boteco+de+Sampa+Boqueir%C3%A3o+Curitiba";
 const LINK_CARDAPIO  = "https://botecodesampa.com/";
 const LINK_INSTAGRAM = "https://www.instagram.com/botecodesampaboqueirao/";
-const LINK_JOGO = /github\.io$/.test(location.hostname) ? "jogo/" : "https://claude.ai/artifact/QxBxaN2bfc1zjUrSDDEp1b";
+const LINK_JOGO = "jogo/";
 document.getElementById("btnJogo").href = LINK_JOGO;
 [["Avaliar",LINK_AVALIACAO],["Cardapio",LINK_CARDAPIO],["Instagram",LINK_INSTAGRAM]].forEach(([k,u])=>["h","t","f"].forEach(p=>document.getElementById(p+k).href=u));
 
